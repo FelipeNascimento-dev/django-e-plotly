@@ -36,3 +36,12 @@ def chart(request):
 
 def yearly_avg_co2(request):
     averages = CO2.objects.values('date__year').annotate(avg=Avg('average'))
+    x = averages.values_list('date__year', flat=True)
+    y = averages.values_list('avg', flat=True)
+
+    fig = px.bar(x=x, y=y)
+    fig.update_layout(title_text='Average CO2 concentration per year')
+
+    chart = fig.to_html()
+    context = {'chart': chart}
+    return render(request, 'core/chart.html', context)
