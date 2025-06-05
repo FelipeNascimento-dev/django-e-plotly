@@ -6,6 +6,13 @@ from core.forms import DateForm
 # Create your views here.
 def chart(request):
     co2 = CO2.objects.all()
+    start = request.GET.get('start')
+    end = request.GET.get('end')
+
+    if start:
+        co2 = co2.filter(date__gte=start)
+    if end:
+        co2 = co2.filter(date__lte=end)
 
     fig = px.line(
         x=[c.date for c in co2],
