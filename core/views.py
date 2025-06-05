@@ -10,7 +10,15 @@ def chart(request):
     fig = px.line(
         x=[c.date for c in co2],
         y=[c.average for c in co2],
+        title = "CO2 PPM", 
+        labels={'x': 'Date', 'y': 'CO2 PPM'}
     )
+
+    fig.update_layout(title={
+        'font_size': 22,
+        'xanchor': 'center',
+        'x': 0.5
+    })
 
     chart = fig.to_html()
 
