@@ -39,8 +39,17 @@ def yearly_avg_co2(request):
     x = averages.values_list('date__year', flat=True)
     y = averages.values_list('avg', flat=True)
 
-    fig = px.bar(x=x, y=y)
-    fig.update_layout(title_text='Average CO2 concentration per year')
+    text = [f'{avg:.0f}'  for avg in y]
+
+
+
+    fig = px.bar(x=x, y=y, text=text)
+    fig.update_layout(
+        title_text='Average CO2 concentration per year',
+        yaxis_range=[0,1500]
+        )
+    
+    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 
     chart = fig.to_html()
     context = {'chart': chart}
