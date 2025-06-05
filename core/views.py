@@ -31,3 +31,6 @@ def chart(request):
 
     context = {'chart': chart, 'form': DateForm()}
     return render(request, 'core/chart.html', context)
+
+def yearly_avg_co2(request):
+    pass
