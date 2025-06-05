@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import plotly.express as px
 from core.models import CO2
-
+from core.forms import DateForm
 
 # Create your views here.
 def chart(request):
@@ -22,5 +22,5 @@ def chart(request):
 
     chart = fig.to_html()
 
-    context = {'chart': chart}
+    context = {'chart': chart, 'form': DateForm()}
     return render(request, 'core/chart.html', context)
