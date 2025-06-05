@@ -9,7 +9,7 @@ def chart(request):
 
     fig = px.line(
         x=[c.date for c in co2],
-        y=[c.value for c in co2],
+        y=[c.average for c in co2],
     )
 
     chart = fig.to_html()
